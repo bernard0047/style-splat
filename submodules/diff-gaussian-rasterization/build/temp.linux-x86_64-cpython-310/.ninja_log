@@ -1,0 +1,6 @@
+# ninja log v5
+1	1806	1718996238025847102	/home/avik/capstone/project/style-gaussian/submodules/diff-gaussian-rasterization/build/temp.linux-x86_64-cpython-310/cuda_rasterizer/forward.o	7e03c487fdfb2c9f
+0	1915	1718996238133847218	/home/avik/capstone/project/style-gaussian/submodules/diff-gaussian-rasterization/build/temp.linux-x86_64-cpython-310/cuda_rasterizer/backward.o	1bd277986345c966
+1	8133	1718996244349853932	/home/avik/capstone/project/style-gaussian/submodules/diff-gaussian-rasterization/build/temp.linux-x86_64-cpython-310/cuda_rasterizer/rasterizer_impl.o	e7757b532878e6e5
+2	17395	1718996253609863921	/home/avik/capstone/project/style-gaussian/submodules/diff-gaussian-rasterization/build/temp.linux-x86_64-cpython-310/ext.o	b8a9896d37921d8b
+2	50791	1718996286993899805	/home/avik/capstone/project/style-gaussian/submodules/diff-gaussian-rasterization/build/temp.linux-x86_64-cpython-310/rasterize_points.o	f70bf1cc3df7e7f4

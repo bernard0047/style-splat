@@ -1,0 +1,4 @@
+# ninja log v5
+0	10939	1718996191785796925	/home/avik/capstone/project/style-gaussian/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/simple_knn.o	2090fe840d90f2c8
+0	16601	1718996197445803089	/home/avik/capstone/project/style-gaussian/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/ext.o	c903e5a4ce367f68
+0	49416	1718996230257838701	/home/avik/capstone/project/style-gaussian/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/spatial.o	577968b93cceb9e
