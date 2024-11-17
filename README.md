@@ -61,10 +61,11 @@ Before training or applying style transfer, you need to prepare pseudo labels fo
 
 ### 2. Training Gaussian Grouping Instance
    - Train the model to group Gaussians:
-    ```bash 
-    python train.py -s data/your_scene -r 2 \
-    --config config/gaussian_dataset/train.json --port 8000 \
-    -m outputs/your_scene_output
+        ```bash 
+        python train.py -s data/your_scene -r 2 \
+        --config config/gaussian_dataset/train.json --port 8000 \
+        -m outputs/your_scene_output
+        ```
 
 ### 3. Style Transfer
 
