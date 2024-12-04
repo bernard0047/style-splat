@@ -14,6 +14,8 @@ import sys
 from datetime import datetime
 import numpy as np
 import random
+from scipy.spatial import ConvexHull, Delaunay
+
 
 def inverse_sigmoid(x):
     return torch.log(x/(1-x))
@@ -111,6 +113,47 @@ def build_scaling_rotation(s, r):
 
     L = R @ L
     return L
+
+
+def points_inside_convex_hull(point_cloud, mask, remove_outliers=True, outlier_factor=1.0):
+    """
+    Given a point cloud and a mask indicating a subset of points, this function computes the convex hull of the 
+    subset of points and then identifies all points from the original point cloud that are inside this convex hull.
+    
+    Parameters:
+    - point_cloud (torch.Tensor): A tensor of shape (N, 3) representing the point cloud.
+    - mask (torch.Tensor): A tensor of shape (N,) indicating the subset of points to be used for constructing the convex hull.
+    - remove_outliers (bool): Whether to remove outliers from the masked points before computing the convex hull. Default is True.
+    - outlier_factor (float): The factor used to determine outliers based on the IQR method. Larger values will classify more points as outliers.
+    
+    Returns:
+    - inside_hull_tensor_mask (torch.Tensor): A mask of shape (N,) with values set to True for the points inside the convex hull 
+                                              and False otherwise.
+    """
+
+    # Extract the masked points from the point cloud
+    masked_points = point_cloud[mask].cpu().numpy()
+
+    # Remove outliers if the option is selected
+    if remove_outliers:
+        Q1 = np.percentile(masked_points, 25, axis=0)
+        Q3 = np.percentile(masked_points, 75, axis=0)
+        IQR = Q3 - Q1
+        outlier_mask = (masked_points < (Q1 - outlier_factor * IQR)) | (masked_points > (Q3 + outlier_factor * IQR))
+        filtered_masked_points = masked_points[~np.any(outlier_mask, axis=1)]
+    else:
+        filtered_masked_points = masked_points
+
+    # Compute the Delaunay triangulation of the filtered masked points
+    delaunay = Delaunay(filtered_masked_points)
+
+    # Determine which points from the original point cloud are inside the convex hull
+    points_inside_hull_mask = delaunay.find_simplex(point_cloud.cpu().numpy()) >= 0
+
+    # Convert the numpy mask back to a torch tensor and return
+    inside_hull_tensor_mask = torch.tensor(points_inside_hull_mask, device='cuda')
+
+    return inside_hull_tensor_mask
 
 def safe_state(silent):
     old_f = sys.stdout

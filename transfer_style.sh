@@ -13,9 +13,9 @@ path=$1
 cuda_device=$2
 
 root=style-ims
-for dataset_name in "$root"/*; do
+for style_im in "$root"/*; do
     CUDA_VISIBLE_DEVICES=$cuda_device python edit_object_style_transfer.py -m outputs/$path \
         --config_file "config/object_style_transfer/$path.json" --skip_test \
-        --style_image $dataset_name
+        --style_image $style_im
 done
 

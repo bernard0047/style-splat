@@ -22,8 +22,7 @@ import cv2
 import os
 
 from arguments import ModelParams, PipelineParams, OptimizationParams, get_combined_args
-from edit_object_removal import points_inside_convex_hull
-from utils.general_utils import safe_state, PILtoTorch
+from utils.general_utils import safe_state, PILtoTorch, points_inside_convex_hull
 from render import feature_to_rgb, visualize_obj
 from utils.loss_utils import masked_l1_loss
 from gaussian_renderer import GaussianModel
